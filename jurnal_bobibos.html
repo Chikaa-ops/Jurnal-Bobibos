@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bobibos: Inovasi Bahan Bakar Nabati - Jurnal Penelitian</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2ecc71;
+            --secondary: #27ae60;
+            --accent: #f39c12;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #2c3e50;
+            --border: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: var(--text);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(100px, -50px);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .meta {
+            font-size: 0.95em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            background: var(--light);
+            border-bottom: 2px solid var(--border);
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 15px;
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--text);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-size: 0.95em;
+        }
+
+        .tab-btn:hover {
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
+        }
+
+        /* Content */
+        .content {
+            padding: 50px 40px;
+            min-height: 600px;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Typography */
+        .content h2 {
+            font-size: 2em;
+            color: var(--primary);
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 15px;
+        }
+
+        .content h3 {
+            font-size: 1.4em;
+            color: var(--secondary);
+            margin: 30px 0 15px 0;
+            margin-top: 35px;
+        }
+
+        .content p {
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .content ul, .content ol {
+            margin: 25px 0 25px 30px;
+        }
+
+        .content li {
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(39, 174, 96, 0.05) 100%);
+            border-left: 5px solid var(--primary);
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        .highlight-box strong {
+            color: var(--secondary);
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        table tr:hover {
+            background: rgba(46, 204, 113, 0.05);
+        }
+
+        /* Reference List */
+        .reference-list {
+            list-style: none;
+            counter-reset: ref-counter;
+        }
+
+        .reference-list li {
+            counter-increment: ref-counter;
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .reference-list li::before {
+            content: '[' counter(ref-counter) ']';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: var(--accent);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(46, 204, 113, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        /* Info Box */
+        .info-box {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.1) 0%, rgba(230, 126, 34, 0.05) 100%);
+            border-left: 5px solid var(--accent);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                border-radius: 0;
+            }
+
+            .header {
+                padding: 40px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 30px 20px;
+            }
+
+            .tabs {
+                gap: 8px;
+                padding: 10px;
+            }
+
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 0.85em;
+            }
+
+            .content h2 {
+                font-size: 1.5em;
+            }
+
+            .content h3 {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌱 Bobibos</h1>
+            <p class="subtitle">Inovasi Bahan Bakar Nabati di Indonesia</p>
+            <p class="meta">Analisis Kebijakan Energi dan Kerangka Regulasi</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('abstrak')">📋 Abstrak</button>
+            <button class="tab-btn" onclick="showTab('pendahuluan')">🎯 Pendahuluan</button>
+            <button class="tab-btn" onclick="showTab('metodologi')">🔬 Metodologi</button>
+            <button class="tab-btn" onclick="showTab('hasil')">📊 Hasil & Pembahasan</button>
+            <button class="tab-btn" onclick="showTab('kesimpulan')">✓ Kesimpulan</button>
+            <button class="tab-btn" onclick="showTab('referensi')">📚 Referensi</button>
+        </div>
+
+        <div class="content">
+            <!-- Tab: Abstrak -->
+            <div id="abstrak" class="tab-content active">
+                <h2>📋 Abstrak</h2>
+                
+                <div class="highlight-box">
+                    <strong>Bobibos</strong> (Bahan Bakar Original Buatan Indonesia) adalah inovasi biofuel generasi kedua berbasis lignoselulosa jerami padi yang dikembangkan oleh PT Inti Sinergi Formula.
+                </div>
+
+                <h3>Latar Belakang</h3>
+                <p>Penelitian ini menganalisis posisi Bobibos dalam kerangka kebijakan energi nasional Indonesia, mencakup:</p>
+                <ul>
+                    <li>Kesesuaian dengan regulasi bahan bakar nabati (BBN)</li>
+                    <li>Kesenjangan regulasi yang ada</li>
+                    <li>Rekomendasi kebijakan untuk integrasi Bobibos dalam bauran energi nasional</li>
+                </ul>
+
+                <h3>Metode Penelitian</h3>
+                <p>Menggunakan metode analisis kebijakan kualitatif dengan pendekatan:</p>
+                <ul>
+                    <li>Studi literatur</li>
+                    <li>Analisis dokumen regulasi</li>
+                    <li>Kerangka analisis SWOT kebijakan</li>
+                </ul>
+
+                <h3>Temuan Utama</h3>
+                <p>Penelitian menemukan bahwa Bobibos memiliki <strong>potensi strategis</strong> untuk mendukung:</p>
+                <ul>
+                    <li>Target bauran EBT 23% tahun 2025</li>
+                    <li>Komitmen Net Zero Emission 2060</li>
+                </ul>
+
+                <div class="info-box">
+                    <strong>⚠️ Tantangan Kritis:</strong> Empat kesenjangan kebijakan perlu diatasi:
+                    <ol style="margin-top: 10px;">
+                        <li>Ketiadaan regulasi khusus biofuel 2G lignoselulosa</li>
+                        <li>Durasi sertifikasi yang panjang</li>
+                        <li>Absennya insentif fiskal spesifik</li>
+                        <li>Fragmentasi koordinasi lintas kementerian</li>
+                    </ol>
+                </div>
+
+                <h3>Kontribusi Penelitian</h3>
+                <p><strong>Novelty:</strong> Penelitian ini merupakan pemetaan pertama yang secara sistematis menganalisis kesenjangan kebijakan (policy gaps) spesifik untuk biofuel lignoselulosa berbasis jerami padi dalam konteks kerangka regulasi energi Indonesia.</p>
+            </div>
+
+            <!-- Tab: Pendahuluan -->
+            <div id="pendahuluan" class="tab-content">
+                <h2>🎯 Pendahuluan</h2>
+
+                <h3>Konteks Energi Indonesia</h3>
+                <p>Ketergantungan Indonesia pada bahan bakar fosil telah lama menjadi tantangan strategis dalam mewujudkan ketahanan energi nasional. Berdasarkan Peraturan Pemerintah Nomor 79 Tahun 2014 tentang Kebijakan Energi Nasional (KEN), pemerintah menetapkan:</p>
+                
+                <div class="highlight-box">
+                    <strong>Target:</strong> Pemanfaatan Energi Baru dan Terbarukan (EBT) sebesar 23% dari bauran energi primer nasional pada tahun 2025.
+                </div>
+
+                <p><strong>Status Pencapaian:</strong> Hingga akhir 2023, realisasi bauran EBT nasional baru mencapai 13,29%, jauh di bawah target yang diamanatkan (EBTKE, 2024).</p>
+
+                <h3>Peluang: Inovasi Bahan Bakar Nabati</h3>
+                <p>Di tengat kondisi tersebut, inovasi bahan bakar nabati (BBN) berbasis limbah pertanian muncul sebagai alternatif strategis yang menjanjikan. Salah satunya adalah <strong>Bobibos</strong> — akronim dari Bahan Bakar Original Buatan Indonesia.</p>
+
+                <h3>Profil Bobibos</h3>
+                <ul>
+                    <li><strong>Pengembang:</strong> PT Inti Sinergi Formula di Jonggol, Kabupaten Bogor</li>
+                    <li><strong>Bahan Baku Utama:</strong> Jerami padi (limbah pertanian)</li>
+                    <li><strong>Proses:</strong> Ekstraksi biokimia lignoselulosa dan fermentasi terkontrol</li>
+                    <li><strong>Tipe:</strong> Biofuel generasi kedua (2G) berbasis lignoselulosa</li>
+                </ul>
+
+                <h3>Pertanyaan Penelitian</h3>
+                <p>Penelitian ini bertujuan untuk:</p>
+                <ol>
+                    <li>Menganalisis posisi Bobibos dalam kerangka kebijakan energi nasional</li>
+                    <li>Mengidentifikasi kesenjangan regulasi yang menghambat komersialisasi</li>
+                    <li>Menyusun rekomendasi kebijakan berbasis bukti untuk mendorong integrasi Bobibos dalam bauran energi nasional secara berkelanjutan</li>
+                </ol>
+            </div>
+
+            <!-- Tab: Metodologi -->
+            <div id="metodologi" class="tab-content">
+                <h2>🔬 Metodologi Penelitian</h2>
+
+                <h3>Pendekatan dan Desain Penelitian</h3>
+                <p>Penelitian ini menggunakan <strong>pendekatan kualitatif</strong> dengan desain <strong>policy analysis research</strong>. Pendekatan ini dipilih karena sesuai untuk:</p>
+                <ul>
+                    <li>Mengeksplorasi kompleksitas kerangka kebijakan</li>
+                    <li>Mengidentifikasi kesenjangan normatif-substantif antara tujuan kebijakan dan realitas implementasi</li>
+                    <li>Merumuskan rekomendasi yang kontekstual</li>
+                </ul>
+
+                <h3>Sumber Data</h3>
+                <div class="highlight-box">
+                    <strong>Data Primer:</strong> Dokumen teknis resmi PT Inti Sinergi Formula, siaran pers uji teknis Lemigas, dan pernyataan publik yang dapat diverifikasi.
+                </div>
+
+                <p><strong>Data Sekunder:</strong> Mencakup:</p>
+                <ul>
+                    <li>Peraturan perundang-undangan energi (UU, PP, Permen)</li>
+                    <li>Laporan statistik BPS</li>
+                    <li>Laporan lembaga riset (IESR, INDEF)</li>
+                    <li>Literatur akademik terkait kebijakan biofuel dan transisi energi di Indonesia</li>
+                </ul>
+
+                <h3>Teknik Analisis</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tahap</th>
+                            <th>Metode</th>
+                            <th>Output</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Inventarisasi Regulasi</strong></td>
+                            <td>Analisis dokumen (regulatory mapping)</td>
+                            <td>Peta regulasi BBN hierarkis</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Analisis Kesenjangan</strong></td>
+                            <td>Gap analysis (is vs. ought)</td>
+                            <td>Matriks policy gaps</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Penilaian Potensi</strong></td>
+                            <td>Analisis SWOT kebijakan</td>
+                            <td>Matriks SWOT Bobibos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Rekomendasi</strong></td>
+                            <td>Analisis opsi kebijakan (policy options)</td>
+                            <td>Rekomendasi berbasis bukti</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Batasan Penelitian</h3>
+                <p>Penelitian ini bersifat analisis kebijakan deskriptif-preskriptif dan <strong>tidak mencakup</strong>:</p>
+                <ul>
+                    <li>Pengujian teknis laboratorium</li>
+                    <li>Analisis siklus hidup (LCA) biofuel</li>
+                    <li>Uji ekonometrik terhadap dampak kebijakan</li>
+                </ul>
+                <p><em>Seluruh data teknis Bobibos mengacu pada dokumen yang tersedia secara publik hingga Maret 2025.</em></p>
+            </div>
+
+            <!-- Tab: Hasil & Pembahasan -->
+            <div id="hasil" class="tab-content">
+                <h2>📊 Hasil & Pembahasan</h2>
+
+                <h3>Profil Teknis Bobibos</h3>
+                <p>Bobibos hadir dalam dua varian:</p>
+                <ul>
+                    <li><strong>Bobibos Putih:</strong> Bensin dengan RON 98,1</li>
+                    <li><strong>Bobibos Merah:</strong> Solar/diesel</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>Keunggulan Utama:</strong> Nilai oktan 98,1 melampaui Pertamina Turbo (RON 98) berdasarkan sertifikasi awal Lemigas (Kementerian ESDM), dengan harga produksi hanya sepertiga BBM fosil setara kualitas.
+                </div>
+
+                <h3>Perbandingan Spesifikasi</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Bobibos Putih</th>
+                            <th>Pertamina Turbo</th>
+                            <th>Pertalite</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nilai Oktan (RON)</td>
+                            <td><strong>98,1</strong> ✓</td>
+                            <td>98</td>
+                            <td>90</td>
+                        </tr>
+                        <tr>
+                            <td>Kategori Bahan Bakar</td>
+                            <td>Biofuel 2G</td>
+                            <td>Nabati</td>
+                            <td>Fosil</td>
+                        </tr>
+                        <tr>
+                            <td>Bahan Baku Utama</td>
+                            <td>Jerami padi</td>
+                            <td>Minyak bumi</td>
+                            <td>Minyak bumi</td>
+                        </tr>
+                        <tr>
+                            <td>Emisi CO₂</td>
+                            <td><strong>Rendah (karbon netral)</strong></td>
+                            <td>Tinggi</td>
+                            <td>Tinggi</td>
+                        </tr>
+                        <tr>
+                            <td>Harga Relatif</td>
+                            <td>~1/3 harga setara</td>
+                            <td>Tinggi</td>
+                            <td>Disubsidi negara</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Potensi Produksi</h3>
+                <p>Dari aspek bahan baku, luas panen padi Indonesia sebesar 10,05 juta hektare pada 2024 menghasilkan jerami dalam volume sangat besar.</p>
+                
+                <div class="info-box">
+                    <strong>📈 Estimasi Potensi:</strong> Dengan asumsi 3.000 liter Bobibos per hektare jerami, <strong>potensi produksi teoritis mencapai 30,15 miliar liter per tahun</strong> — angka yang signifikan untuk diversifikasi energi nasional.
+                </div>
+
+                <h3>Analisis SWOT Kebijakan Bobibos</h3>
+                
+                <h4 style="color: var(--secondary); margin-top: 25px;">💪 STRENGTHS (Kekuatan)</h4>
+                <ul>
+                    <li>RON 98,1 melampaui BBM fosil setara</li>
+                    <li>Bahan baku jerami melimpah (10 juta ha/tahun)</li>
+                    <li>Harga produksi kompetitif (~1/3 BBM fosil)</li>
+                    <li>Emisi rendah, mendukung NZE 2060</li>
+                    <li>Telah melalui uji awal di Lemigas</li>
+                </ul>
+
+                <h4 style="color: var(--secondary); margin-top: 25px;">⚠️ WEAKNESSES (Kelemahan)</h4>
+                <ul>
+                    <li>Belum tersertifikasi penuh (8+ bulan proses)</li>
+                    <li>Skala produksi masih pilot project</li>
+                    <li>Teknologi proses bersifat proprietary</li>
+                    <li>Belum ada bukti uji jangka panjang mesin</li>
+                    <li>Ketergantungan pada satu produsen</li>
+                </ul>
+
+                <h4 style="color: var(--secondary); margin-top: 25px;">🎯 OPPORTUNITIES (Peluang)</h4>
+                <ul>
+                    <li>Permen ESDM No. 4/2025: insentif BBN</li>
+                    <li>Target B-50 biodiesel buka ruang diversifikasi</li>
+                    <li>Komitmen NZE 2060 butuh portofolio EBT luas</li>
+                    <li>Tren global biofuel 2G (RED III Uni Eropa)</li>
+                    <li>Potensi ekspor ke pasar ASEAN</li>
+                </ul>
+
+                <h4 style="color: var(--secondary); margin-top: 25px;">🚨 THREATS (Ancaman)</h4>
+                <ul>
+                    <li>Dominasi biodiesel CPO dalam ekosistem BBN</li>
+                    <li>Proses regulasi yang lamban dan birokratis</li>
+                    <li>Potensi resistensi dari industri BBM fosil</li>
+                    <li>Risiko fluktuasi pasokan jerami (musiman)</li>
+                    <li>Dampak lingkungan jika jerami tidak dikembalikan ke tanah</li>
+                </ul>
+
+                <h3>Pemetaan Kesenjangan Kebijakan (Policy Gaps)</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Kesenjangan</th>
+                            <th>Dampak</th>
+                            <th>Prioritas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Tidak ada regulasi khusus biofuel 2G lignoselulosa</td>
+                            <td>Ketidakpastian hukum, investor enggan masuk</td>
+                            <td><span style="background: #e74c3c; color: white; padding: 5px 10px; border-radius: 4px;">TINGGI</span></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Proses sertifikasi terlalu panjang (8+ bulan)</td>
+                            <td>Inovasi dalam negeri sulit masuk pasar secara cepat</td>
+                            <td><span style="background: #e74c3c; color: white; padding: 5px 10px; border-radius: 4px;">TINGGI</span></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Belum ada insentif fiskal spesifik biofuel 2G non-pangan</td>
+                            <td>Daya tarik investasi rendah dibanding biodiesel sawit</td>
+                            <td><span style="background: #f39c12; color: white; padding: 5px 10px; border-radius: 4px;">SEDANG</span></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Fragmentasi regulasi lintas Kementerian</td>
+                            <td>Koordinasi lemah, duplikasi & konflik regulasi</td>
+                            <td><span style="background: #f39c12; color: white; padding: 5px 10px; border-radius: 4px;">SEDANG</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tab: Kesimpulan -->
+            <div id="kesimpulan" class="tab-content">
+                <h2>✓ Kesimpulan</h2>
+
+                <div class="highlight-box">
+                    Penelitian ini menunjukkan bahwa <strong>Bobibos memiliki potensi strategis yang signifikan</strong> dalam konteks kebijakan energi Indonesia.
+                </div>
+
+                <h3>Temuan Teknis</h3>
+                <p>Secara teknis, nilai RON 98,1 dan bahan baku jerami padi yang melimpah menempatkan Bobibos sebagai kandidat kuat untuk diversifikasi bauran energi nasional. Namun, akselerasi komersialisasinya sangat bergantung pada kesiapan ekosistem kebijakan dan regulasi.</p>
+
+                <h3>Kesenjangan Kebijakan yang Teridentifikasi</h3>
+                <p>Analisis kebijakan mengidentifikasi <strong>empat kesenjangan kritis</strong>:</p>
+                <ol>
+                    <li><strong>Ketiadaan regulasi khusus biofuel 2G lignoselulosa</strong> — Permen ESDM No. 32/2008 hanya mengatur biodiesel CPO</li>
+                    <li><strong>Proses sertifikasi yang terlalu panjang</strong> — SOP Ditjen Migas & Lemigas belum ada fast-track (8+ bulan)</li>
+                    <li><strong>Absennya insentif fiskal spesifik</strong> — Permen ESDM No. 4/2025 masih bersifat umum</li>
+                    <li><strong>Fragmentasi koordinasi lintas kementerian</strong> — Tidak ada koordinator tunggal biofuel 2G (ESDM, Pertanian, Perindustrian)</li>
+                </ol>
+
+                <h3>Peluang Kebijakan</h3>
+                <p>Permen ESDM No. 4/2025 tentang Pengusahaan dan Pemanfaatan Bahan Bakar Nabati membuka peluang nyata melalui ketentuan insentif BBN. Namun, perlu diikuti dengan harmonisasi regulasi yang lebih komprehensif.</p>
+
+                <h3>Kontribusi dan Rekomendasi Penelitian</h3>
+                <div class="info-box">
+                    <strong>Novelty Penelitian:</strong> Penelitian ini merupakan pemetaan pertama kesenjangan kebijakan spesifik biofuel lignoselulosa jerami padi dalam konteks hukum energi Indonesia — sebuah kontribusi bagi literatur kebijakan EBT domestik yang masih didominasi kajian biodiesel CPO.
+                </div>
+
+                <h3>Rekomendasi Penelitian Lanjutan</h3>
+                <p>Penelitian lanjutan disarankan mencakup:</p>
+                <ul>
+                    <li><strong>Studi kelayakan ekonomi skala penuh</strong> untuk Bobibos</li>
+                    <li><strong>Analisis siklus hidup (LCA)</strong> untuk memperkuat basis bukti kebijakan</li>
+                    <li><strong>Simulasi dampak kebijakan</strong> terhadap pasar energi nasional</li>
+                </ul>
+
+                <div class="highlight-box">
+                    Implementasi kelima rekomendasi kebijakan secara sinergis diperkirakan dapat membuka potensi kontribusi biofuel lignoselulosa sebesar <strong>2–3% dari bauran EBT nasional pada tahun 2030</strong>, sekaligus menciptakan nilai ekonomi bagi petani padi di seluruh Indonesia.
+                </div>
+            </div>
+
+            <!-- Tab: Referensi -->
+            <div id="referensi" class="tab-content">
+                <h2>📚 Daftar Pustaka</h2>
+                <p><em>Disusun berdasarkan format APA 7th Edition</em></p>
+
+                <ul class="reference-list">
+                    <li>Badan Pusat Statistik. (2024). <em>Luas panen dan produksi padi di Indonesia tahun 2024</em>. Jakarta: BPS.</li>
+                    <li>Badan Standardisasi Nasional. (2015). <em>SNI 7182:2015: Biodiesel</em>. Jakarta: BSN.</li>
+                    <li>Direktorat Jenderal Energi Baru Terbarukan dan Konservasi Energi. (2024). <em>Laporan capaian bauran energi terbarukan 2023</em>. Jakarta: Kementerian ESDM.</li>
+                    <li>Dunn, W. N. (2018). <em>Public policy analysis: An integrated approach</em> (6th ed.). Routledge.</li>
+                    <li>Geels, F. W. (2011). The multi-level perspective on sustainability transitions: Responses to seven criticisms. <em>Environmental Innovation and Societal Transitions, 1</em>(1), 24–40. https://doi.org/10.1016/j.eist.2011.02.002</li>
+                    <li>Howlett, M., Mukherjee, I., & Woo, J. J. (2020). <em>The policy design primer: Choosing the right tools for the job</em> (2nd ed.). Routledge.</li>
+                    <li>Institute for Essential Services Reform. (2025). <em>Indonesia energy transition outlook 2025</em>. Jakarta: IESR.</li>
+                    <li>International Energy Agency. (2022). <em>Bioenergy: Tracking clean energy progress</em>. Paris: IEA. https://www.iea.org/reports/bioenergy</li>
+                    <li>INDEF. (2025). <em>Policy brief No. 02/2025: Kebijakan mandatori biofuel dan keberlanjutan BPDPKS</em>. Jakarta: INDEF.</li>
+                    <li>Kementerian Energi dan Sumber Daya Mineral. (2025). <em>Peraturan Menteri ESDM Nomor 4 Tahun 2025 tentang Pengusahaan dan Pemanfaatan Bahan Bakar Nabati</em>. Jakarta: Kementerian ESDM.</li>
+                    <li>Nasution, M. A., Wibawa, D. S., & Supriadi, H. (2023). Kebijakan mandatori biodiesel B30 di Indonesia: Dampak ekonomi dan lingkungan. <em>Jurnal Penelitian Kelapa Sawit, 31</em>(1), 45–60.</li>
+                    <li>Obidzinski, K., Andriani, R., Komarudin, H., & Andrianto, A. (2012). Environmental and social impacts of oil palm plantations and their implications for biofuel production in Indonesia. <em>Ecology and Society, 17</em>(1), 25.</li>
+                    <li>Pemerintah Republik Indonesia. (2006). <em>Instruksi Presiden Nomor 1 Tahun 2006 tentang Penyediaan dan Pemanfaatan Bahan Bakar Nabati</em>. Jakarta.</li>
+                    <li>Pemerintah Republik Indonesia. (2014). <em>Peraturan Pemerintah Nomor 79 Tahun 2014 tentang Kebijakan Energi Nasional</em>. Jakarta.</li>
+                    <li>Pemerintah Republik Indonesia. (2017). <em>Peraturan Presiden Nomor 22 Tahun 2017 tentang Rencana Umum Energi Nasional</em>. Jakarta.</li>
+                    <li>PT Inti Sinergi Formula. (2024). <em>Profil produk dan uji teknis Bobibos</em>. Bogor: PT ISF.</li>
+                    <li>Sovacool, B. K., & Mukherjee, I. (2011). Conceptualizing and measuring energy security. <em>Energy, 36</em>(8), 5343–5355.</li>
+                    <li>Wirawan, S., Pratiwi, D., & Kurniawan, A. (2024). Evaluasi dan strategi biodiesel sebagai energi terbarukan di Indonesia: Perspektif kebijakan publik. <em>Jurnal Energi Terbarukan Indonesia, 3</em>(2), 78–95.</li>
+                </ul>
+
+                <div class="info-box" style="margin-top: 40px;">
+                    <strong>© 2025 Riskayani | WorldQuant University</strong><br>
+                    Jurnal Penelitian Energi & Kebijakan Publik | Vol. 1 No. 1, 2025<br>
+                    📧 riskayanisultan05@gmail.com
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Bobibos: Inovasi Bahan Bakar Nabati Indonesia</strong></p>
+            <p>© 2025 Riskayani | WorldQuant University</p>
+            <p>Jurnal Penelitian Energi & Kebijakan Publik | Vol. 1 No. 1</p>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
